@@ -1,0 +1,151 @@
+
+<div class="card mb-5 mb-xl-10" *ngIf="schoolData">
+    <div class="card-body pt-9 pb-0">
+        <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+            <div class="flex-grow-1">
+                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1 cursor-pointer">{{schoolData?.name}}<span class="badge-light-success me-4 p-3 fs-4 border border-0 rounded m-5">{{schoolData && (schoolData?.school_type == 1 ? 'Elementary': schoolData.school_type == 2 ? 'Secondary': 'other' )}}</span></div>
+                        </div>
+                        <div class="fw-bold fs-6 mb-4 pe-2 mt-5">
+                            <a class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-6 cursor-pointer">
+                                <label class="col-lg-8 fw-bold text-muted me-4">Head Master : </label>
+                                {{schoolData?.master_name}}
+                            </a>
+                            
+                            <a class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-6 cursor-pointer">
+                                <label class="col-lg-8 fw-bold text-muted me-4">Contact Number : </label>
+
+                                {{schoolData?.master_number}}
+                            </a>
+                            <a class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-6 cursor-pointer">
+                                <label class="col-lg-8 fw-bold text-muted me-4">Schoolnet Code : </label>
+
+                                {{schoolData?.schoolnet_code}}
+                            </a>
+                            <a class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-6 cursor-pointer">
+                                <label class="col-lg-8 fw-bold text-muted me-4">UDISE Code : </label>
+                                {{schoolData && schoolData.UDISE_code && schoolData.UDISE_code}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+    </div>
+    
+    <div  class="card shadow-none rounded-0 w-100 ms-5">
+        <div class="card-body p-1 ps-5" >
+            <div class="d-flex h-55px">
+                <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
+                    <li class="nav-item">
+                        <a [class]="'cursor-pointer nav-link text-active-primary me-6'+(activeTab==1?' active':'')" (click)="changeTab(1)">
+                            Overview
+                        </a>
+                    </li>
+                    <li class="nav-item" *ngIf="user.type != 6">
+                        <a [class]="'cursor-pointer nav-link text-active-primary me-6'+(activeTab==2?' active':'')" (click)="changeTab(2)">
+                            Assets
+                        </a>
+                    </li>
+    
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="card mb-5 mb-xl-8" *ngIf="activeTab==1">
+    
+            <div class="card-body p-9">
+                <div class="row mb-7">
+                    <label class="col-lg-4 fw-bold text-muted">Contact Person : </label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-900">
+    
+                            {{schoolData  && (schoolData.contact_person == "" ? schoolData.master_name : schoolData.contact_person)}}
+                             <span class="badge badge-light-success fs-3 p-2">{{schoolData  && (schoolData.contact_person_designation == "" ? 'Head Master' : schoolData.contact_person_designation)}}
+                                </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <label class="col-lg-4 fw-bold text-muted">Contact Person Number : </label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-900">
+    
+                            {{schoolData  && (schoolData.contact_person_number == "" || schoolData.contact_person_number == null ? schoolData.master_number : schoolData.contact_person_number)}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <label class="col-lg-4 fw-bold text-muted">Service Engineer : </label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-900">
+    
+                            {{schoolData  && (schoolData.User.user_name == "" || schoolData.User.user_name == null ? schoolData.User.user_name : schoolData.User.user_name)}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <label class="col-lg-4 fw-bold text-muted">Contact Engineer : </label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-900">
+    
+                            {{schoolData  && (schoolData.User.phone == "" || schoolData.User.phone == null ? schoolData.User.phone : schoolData.User.phone)}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <label class="col-lg-4 fw-bold text-muted">Full Address :  </label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-900">
+    
+                            {{schoolData && schoolData.address && schoolData.address}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <label class="col-lg-4 fw-bold text-muted">District : </label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-900">
+    
+                            {{schoolData && schoolData.district && schoolData.district}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <label class="col-lg-4 fw-bold text-muted">Block : </label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-900">
+    
+                            {{schoolData && schoolData.block && schoolData.block}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-7">
+                    <label class="col-lg-4 fw-bold text-muted">Pin Code : </label>
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-900">
+    
+                            {{schoolData && schoolData.pincode && schoolData.pincode}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+    
+    
+    
+    </div>
+    <div class="card mb-5 mb-xl-8" *ngIf="activeTab==2">
+        <div class="border border-dotted border-6 border-gray-2 rounded p-5 mb-6">
+            <div class="card">
+                <app-assets></app-assets>
+            </div>
+        </div>
+    
+    </div>
+</div>
+

@@ -1,0 +1,189 @@
+<div class="card mb-5 mb-xl-8">
+  <div class="card-header border-0 pt-5">
+    <h3 class="card-title align-items-start flex-column" *ngIf="type != 1">
+      <span class="card-label fw-bolder fs-3 mb-1"
+        >Manage {{ commonEntityName }}</span
+      >
+      <!--<span class="text-muted mt-1 fw-bold fs-7">Manage Frontend Users</span>-->
+    </h3>
+    <div
+      class="card-toolbar"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      data-bs-trigger="hover"
+      title="Click to add User"
+    >
+      <a
+        *ngIf="user.type == 1 || user.type == 5"
+        routerLink="add"
+        routerLinkActive="active"
+        class="btn btn-sm btn-primary"
+      >
+        <span
+          [inlineSVG]="'./assets/media/icons/schoolnet/plus-squared.svg'"
+          class="svg-icon svg-icon-3"
+        ></span>
+        Add {{ commonEntityName }}
+      </a>
+      <button (click)="openModal(2)"  class="btn btn-sm btn-primary m-1" *ngIf="user.type == 1">
+        <span [inlineSVG]="'./assets/media/icons/schoolnet/plus-squared.svg'" class="svg-icon svg-icon-3"></span>
+        Add Bulk {{commonEntityName}}
+    </button>
+    </div>
+  </div>
+  <div
+    class="card-toolbar"
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    data-bs-trigger="hover"
+  ></div>
+
+  <div class="card-body py-3">
+    <div class="row" >
+      <div class="col-lg-12 fv-row">
+    <!-- begin::Table container -->
+    <div class="d-flex overflow-auto h-55px">
+      <ul
+        class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap"
+      >
+        <li class="nav-item">
+          <a
+            class="nav-link text-active-primary me-6"
+            (click)="changeVisitType(0)"
+            [ngClass]="visitType == 0 ? 'active' : ''"
+          >
+            Grievance Visit
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-active-primary me-6"
+            (click)="changeVisitType(1)"
+            [ngClass]="visitType == 1 ? 'active' : ''"
+          >
+            Regular Visit
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="row mt-5 mb-5" *ngIf="type != 1">
+      <div class="col-lg-6 fv-row">
+      <label for="from" class="col-lg-1 col-form-label fw-bold fs-6 d-inline-block me-2"
+        >From:</label
+      >
+
+        <input
+          class="mw-150px form-control form-control-solid-bg d-inline-block me-5"
+          [(ngModel)]="fromDate"
+          id="from"
+          type="date"
+          (change)="handleDateSearch($event)"
+        />
+
+      <label for="to" class="col-form-label fw-bold fs-6 text-end d-inline-block me-2"
+        >To:</label
+      >
+
+        <input
+          class="mw-150px form-control form-control-solid-bg d-inline-block me-5"
+          [(ngModel)]="toDate"
+          (change)="handleDateSearch($event)"
+          id="to"
+          type="date"
+          [min]="fromDate"
+        />
+
+        <button
+          (click)="clearDate()"
+          class="btn btn-primary"
+          *ngIf="toDate !== null || fromDate !== null"
+          type="button"
+        >
+          <ng-container>Clear</ng-container>
+        </button>
+      </div>
+      <div class="col-lg-3">
+        <select
+          name="ticketType"
+          required
+          class="form-select form-select-solid form-select-lg fw-bold"
+          (change)="onTypeChange($event)"
+        >
+          <option value="0">Select Visit Type</option>
+          <option value="1">On going</option>
+          <option value="2">Upcoming</option>
+          <option value="3">Absent</option>
+          <option value="4">Completed</option>
+
+        </select>
+      </div>
+      <div class="col-lg-3 fv-row" *ngIf="user.type != 3">
+        <ng-select
+        
+          (change)="findSchool($event)"
+          [items]="schoolList"
+          [multiple]="false"
+          [closeOnSelect]="true"
+          [searchable]="true"
+          placeholder="Select School"
+          bindLabel="name"
+          bindValue="id"
+          [searchable]="true"
+        />
+      </div>
+    </div>
+    <div class="grid-control ps-15">
+      <div class="col-lg-12">
+            
+        <button (click)="download()" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="school_visit_table" type="button"><span>Download Excel</span></button>
+        </div> 
+    </div>
+ 
+
+      <div class="table-responsive user-grid">
+    
+        <ng-container *ngIf="visitType == 0">
+          <!-- begin::Table -->
+          <table
+            [id]="commonEntityNameTable"
+            datatable
+            [dtOptions]="dtOptions0"
+            class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
+          ></table>
+          <!-- end table -->
+        </ng-container>
+        <ng-container *ngIf="visitType == 1">
+          <!-- begin::Table -->
+          <table
+            [id]="commonEntityNameTable"
+            datatable
+            [dtOptions]="dtOptions1"
+            class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
+          ></table>
+          <!-- end table -->
+        </ng-container>
+      </div>
+     
+</div>
+</div>
+
+
+   
+  </div>
+  
+</div>
+<div class="modal bs-modal" tabindex="-1" role="dialog" [ngStyle]="{'display':addBulkAssetModalStyle}">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Add Bulk School Visit</h4>
+              <button type="button" class="close" (click)="close()">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body fs-4 lightText">
+              <app-add-bulk-asset (OnAddForm)="onAdded()" [type]="1"></app-add-bulk-asset>
+          </div>
+      </div>
+  </div>
+</div>

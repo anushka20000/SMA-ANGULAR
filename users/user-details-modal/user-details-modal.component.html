@@ -1,0 +1,79 @@
+<div class="card mb-5 mb-xl-10" *ngIf="userData">
+    <div class="card-body pt-9 pb-0">
+        <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+            <div class="flex-grow-1">
+                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1 cursor-pointer">{{userData.user_name}}<span class="badge-light-success m-5 me-4 p-3 fs-4 border border-0 rounded">{{userData.user_type == 1 ? 'Admin': userData.user_type == 2 ? 'OEM': userData.user_type == 3 ? 'School View': userData.user_type == 4 ? 'Service Engineer': userData.user_type == 5 ? 'Help Desk': userData.user_type == 6 ? 'Office Management View': 'Others'}}</span></div>
+                        </div>
+                        <div class="fw-bold fs-6 mb-4 pe-2 mt-5">
+                            <a class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-6 cursor-pointer" *ngIf="userData.role">
+                                <span class="me-4">
+                                    <span [inlineSVG]="'./assets/media/icons/schoolnet/profile-user.svg'" class="svg-icon svg-icon-1"></span>
+                                </span>
+                                {{userData.role}}
+                            </a>
+                  
+                            <a class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-6 cursor-pointer" *ngIf="userData.address">
+                                <span class="me-4">
+                                    <span [inlineSVG]="'./assets/media/icons/schoolnet/gps.svg'" class="svg-icon svg-icon-1"></span>
+                                   
+                                </span>
+                                {{userData.address}}
+                            </a>
+                            
+                  
+
+                            <a class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-6 cursor-pointer" *ngIf="userData.email">
+                                <span class="me-4">
+                                    <span [inlineSVG]="'./assets/media/icons/schoolnet/email.svg'" class="svg-icon svg-icon-1"></span>
+                                    
+                                </span>
+                                {{userData.email}}
+                            </a>
+               
+                            
+
+                            <a class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-6 cursor-pointer" *ngIf="userData.phone">
+                                <span class="me-4">
+                                    <span [inlineSVG]="'./assets/media/icons/schoolnet/phone-call.svg'" class="svg-icon svg-icon-1"></span>
+                                    
+                                </span>
+                                {{userData.phone}}
+                            </a>
+                            
+                        </div>
+                        <div class="d-flex align-items-center mb-6">
+                            <div class="text-gray-800 text-hover-primary fs-2 fw-bolder me-1 cursor-pointer">Profile Details</div>
+                        </div>
+                        <div class="row mb-6">
+                            <label class="col-lg-4 fw-bold text-muted">Created On : </label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-900">
+            
+                                    {{createdDate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row mb-6">
+                            <label class="col-lg-4 fw-bold text-muted">Full Address : </label>
+                            <div class="col-lg-8">
+                                <span class="fw-bolder fs-6 text-gray-900">
+            
+                                    {{userData.address}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+
+           
+        </div>
+
+ 
+
+</div>

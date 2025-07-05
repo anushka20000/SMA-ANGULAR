@@ -1,0 +1,34 @@
+<div class="card mb-5 mb-xl-8">
+    <div class="card-header border-0 pt-5">
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bolder fs-3 mb-1">Manage {{commonEntityName}}</span>
+            <!--<span class="text-muted mt-1 fw-bold fs-7">Manage Frontend Users</span>-->
+        </h3>
+        <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add User">
+
+            
+        </div>
+    </div>
+
+    <div class="card-body py-3">
+        <!-- begin::Table container -->
+        <div class="table-responsive">
+            <!-- begin::Table -->
+            <table id="frontend_user_table" datatable [dtOptions]="dtOptions"  class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+               
+
+<div class="modal bs-modal" tabindex="-1" role="dialog" [ngStyle]="{'display':viewDetailModalStyle}">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">User Details</h4>
+                <button type="button" class="close" (click)="closePopup()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body fs-4 lightText">
+                <!-- <app-school-details></app-school-details> -->
+            </div>
+        </div>
+    </div>
+</div>

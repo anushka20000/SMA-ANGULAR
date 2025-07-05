@@ -1,0 +1,331 @@
+<!--begin::Row-->
+<div class="row g-5 g-xl-10 mb-5 mb-xl-10 d-flex flex-wrap justify-content-between" *ngIf="dashboard">
+  <div class="page-title d-flex flex-wrap me-3 flex-column justify-content-start">
+
+    <h1 class="page-heading d-flex text-dark fw-bold fs-3 my-0"
+        [ngClass]="'flex-column'">
+      Dashboard
+      <!--begin::Description
+      <span class="page-desc text-muted fs-7 fw-semibold">
+        Manage your employee and forms
+        </span>
+      end::Description-->
+    </h1>
+
+  </div>
+  <!-- <div class="d-flex align-items-center gap-2 gap-lg-3 justify-content-end">
+    <button
+      type="button"
+      class="btn btn-sm fw-bold btn-primary"
+      data-kt-menu-trigger="click"
+      data-kt-menu-placement="bottom-end"
+      data-kt-menu-flip="top-end"
+    > <span
+      [inlineSVG]="'./assets/media/icons/duotune/general/gen041.svg'"
+      class="svg-icon svg-icon-3"
+    ></span> New Grievance</button>
+
+  </div> -->
+
+</div>
+<div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6 mb-6" *ngIf="user?.type == 3 && dashboard?.recentAsset !== 0">
+  {{dashboard?.recentAsset}} new device added
+
+  <br>
+  your school just received {{dashboard?.recentAsset}} new device from schoolnet by admin
+
+</div>
+<div class="row gy-5 g-xl-8" *ngIf="user?.type == 1 || user?.type == 5 || user?.type == 6">
+  <div class="col-xl-4" *ngIf="user?.type != 6">
+    <div class="row">
+      <app-cards-widget19 cssClass=" mb-5 mb-xl-10" title="IFP Grievances Overview" *ngIf="dashboard"
+                          [title1]="'Resolved Grievances'"
+                          [title2]="'Pending Grievances'"
+                          [title3]="'In Progress Grievances'"
+                          [total]="dashboard?.ifpGrievance"
+                          [completed]="dashboard?.ifpcompleted"
+                          [pending]="dashboard?.ifppending"
+                          [type]="3"
+                          [inProgress]="dashboard?.ifpprogress"
+      ></app-cards-widget19>
+    </div>
+    <div class="row">
+      <app-cards-widget19 cssClass="mb-5 mb-xl-10" title="KYAN Grievances Overview" *ngIf="dashboard"
+                          [title1]="'Resolved Grievances'"
+                          [title2]="'Pending Grievances'"
+                          [title3]="'In Progress Grievances'"
+
+
+                          [total]="dashboard?.kyanGrievance"
+                          [completed]="dashboard?.kyancompleted"
+                          [pending]="dashboard?.kyanpending"
+                          [type]="3"
+                          [inProgress]="dashboard?.kyanprogress"
+      ></app-cards-widget19>
+    </div>
+
+  </div>
+  <div class="col-xl-4" *ngIf="user?.type != 6">
+    <div class="row">
+    <app-cards-widget19 cssClass=" mb-5 mb-xl-10" title="IFP Schools Overview" *ngIf="dashboard"
+                        [title1]="'Total Schools'"
+                        [title2]="'Allocated Assets'"
+                        [title3]="'Total Grievances'"
+                        [total]="dashboard?.ifpSchool"
+                        [completed]="dashboard?.ifpSchool"
+                        [pending]="dashboard?.allocatedAssets"
+                        [type]="3" [inProgress]="dashboard?.ifpGrievance"
+    ></app-cards-widget19>
+    </div>
+    <div class="row">
+      <app-cards-widget19 cssClass=" mb-5 mb-xl-10" title="KYAN Schools Overview" *ngIf="dashboard"
+                          [title1]="'Total Schools'"
+                          [title2]="'Allocated Assets'"
+                          [title3]="'Total Grievances'"
+                          [total]="dashboard?.kyanSchool"
+                          [completed]="dashboard?.kyanSchool"
+                          [pending]="dashboard?.kyanallocatedAssets"
+                          [type]="3" [inProgress]="dashboard?.kyanGrievance"
+      ></app-cards-widget19>
+    </div>
+  </div>
+
+  <div class="col-xl-4" *ngIf="user?.type == 6" >
+    <app-cards-widget19 cssClass=" mb-5 mb-xl-10" title="IFP Schools Overview" *ngIf="dashboard"
+                        [title1]="'Total Schools'"
+                        [title2]="'Total Device'"
+                        [title3]="'Connected Device'"
+                        [title4]="'Not Connected Device'"
+                        [total]="dashboard?.ifpSchool"
+                        [completed]="dashboard?.ifpSchool"
+                        [pending]="management?.totalDevices"
+                        [disconnected]="management?.disconnected"
+                        [type]="1" [inProgress]="management?.connected"
+    ></app-cards-widget19>
+   </div>
+
+   <div class="col-xl-4" *ngIf="user?.type == 6" >
+
+   <app-cards-widget19 cssClass=" mb-5 mb-xl-10" title="Device Information" *ngIf="dashboard"
+   [title1]="'Total Devices'"
+   [title2]="'Active Devices'"
+   [title3]="'Inactive Devices'"
+   [total]="management?.totalDevices"
+   [completed]="management?.active"
+   [type]="2"
+   [pending]=0
+   [inProgress]="management?.inactive"
+   [user]="6"
+   [chartSize]="140" 
+   [chartLine]="20" 
+ 
+ ></app-cards-widget19>
+ </div>
+
+  <div class="col-xl-4" *ngIf="user?.type ==6">
+    <app-lists-widget6 [user]="user" [asset]="dashboard?.asset" [school]="dashboard?.ifpSchool" [serviceEngineerIfp]="dashboard?.serviceEngineerIfp" [serviceEngineerKyan]="dashboard?.serviceEngineerKyan" [oem]="dashboard?.oem" [visit]="dashboard?.visit" [attendanceCount]="dashboard?.countAttendance" [type]="5" class="card card-xl-stretch mb-3 mb-xl-10">
+    </app-lists-widget6>
+  </div>
+  <div class="col-xl-4" *ngIf="user?.type != 6">
+    <app-lists-widget6 [user]="user" [asset]="dashboard?.asset" [school]="dashboard?.school" [serviceEngineerIfp]="dashboard?.serviceEngineerIfp" [serviceEngineerKyan]="dashboard?.serviceEngineerKyan" [oem]="dashboard?.oem" [visit]="dashboard?.visit" [attendanceCount]="dashboard?.countAttendance" class="card card-xl-stretch mb-3 mb-xl-10">
+    </app-lists-widget6>
+  </div>
+</div>
+<div class="row gy-5 g-xl-8" *ngIf="user?.type == 6">
+  <div class="col-xl-12">
+    <app-cards-widget19 cssClass=" mb-5 mb-xl-10" *ngIf="dashboard"
+                        [districtData]="management.districtCounts"
+                        [title]="'Districts & Devices'"
+                        [completed]="dashboard?.ifpSchool"
+                        [pending]="management?.totalDevices"
+                        [disconnected]="management?.disconnected"
+                        [type]="4" [inProgress]="management?.connected"
+    ></app-cards-widget19>
+   </div>
+  
+</div>
+<div class="row gy-5 g-xl-8" *ngIf="user?.type == 4">
+
+        <div class="col-xl-4">
+          <app-cards-widget21 [color]="'#7b499d'"
+                              [cssClass]="'h-md-60 mb-5 mb-xl-10'"
+                              [img]="'./assets/media/icons/schoolnet/grievance.svg'"
+                              [num]="dashboard?.count"
+                              [link]="'grievances/manage'"
+                              [description]="'Total Grievances'"></app-cards-widget21>
+        </div>
+
+        <div class="col-xl-4">
+          <app-cards-widget21 [color]="'#3a6fd7'"
+                              [cssClass]="'h-md-60 mb-5 mb-xl-10'"
+                              [img]="'./assets/media/icons/schoolnet/visit.svg'"
+                              [num]="dashboard?.visit"
+                              [link]="'school-visits/manage'"
+                              [description]="'School Visits'"></app-cards-widget21>
+        </div>
+
+        <div class="col-xl-4">
+          <app-cards-widget21 [color]="'#397e31'"
+                              [cssClass]="'h-md-60 mb-5 mb-xl-10'"
+                              [img]="'./assets/media/icons/schoolnet/school.svg'"
+                              [num]="dashboard?.school"
+                              [link]="'#'"
+                              [description]="'Schools'"></app-cards-widget21>
+        </div>
+
+</div>
+<div class="row gy-5 g-xl-8 " *ngIf="user?.type == 3">
+
+        <div class="col-xl-3">
+          <app-cards-widget21 [color]="'#3a6fd7'"
+                              [cssClass]="'h-md-60 mb-5 mb-xl-10'"
+                              [img]="'./assets/media/icons/schoolnet/device.svg'"
+                              [num]="dashboard?.asset"
+                              [link]="'assets/manage'"
+                              [description]="'Asset Name'"></app-cards-widget21>
+
+        </div>
+
+        <!-- <div class="col-xl-3">
+          <app-cards-widget21 [color]="'#9d494b'"
+                              [cssClass]="'h-md-60 mb-5 mb-xl-10'"
+                              [img]="'./assets/media/icons/schoolnet/device.svg'"
+                              [num]="dashboard?.faulty"
+                              [description]="'Faulty Devices'"></app-cards-widget21>
+
+        </div> -->
+
+        <div class="col-xl-3">
+          <app-cards-widget21 
+            [color]="'#9d7949'"
+            [cssClass]="'h-md-60 mb-5 mb-xl-10'"
+            [img]="'./assets/media/icons/schoolnet/grievance.svg'"
+            [num]="dashboard?.pending"
+            [description]="'Open Grievances'"
+            [link]="'grievances/manage'">  <!-- Provide the link here -->
+          </app-cards-widget21>
+        </div>
+        
+        <div class="col-xl-3">
+          <app-cards-widget21 [color]="'#9d7949'"
+                              [cssClass]="'h-md-60 mb-5 mb-xl-10'"
+                              [img]="'./assets/media/icons/schoolnet/grievance.svg'"
+                              [num]="dashboard?.complete"
+                              [description]="'Closed Grievances'"
+                              [link]="'grievances/manage'"></app-cards-widget21>
+
+        </div>
+        <div class="col-xl-3">
+          <app-cards-widget21 [color]="'#7b499d'"
+                              [cssClass]="'h-md-60 mb-5 mb-xl-10'"
+                              [img]="'./assets/media/icons/schoolnet/grievance.svg'"
+                              [num]="dashboard?.count"
+                              [link]="'grievances/manage'"
+                              [description]="'Total Grievances'"></app-cards-widget21>
+        </div>
+
+</div>
+<div class="card mb-5 mb-xl-8" *ngIf="user?.type == 4 || user?.type == 3">
+  <div class="card-body py-10">
+<div class="row" >
+
+    <div class="col-xl-6">
+  
+      <app-charts-widget1 *ngIf="dashboard" name="Grievances" [total]="dashboard?.count" [month]="dashboard.grievanceMonth" [subData]="dashboard?.resolvedGrievance" subDataName="Resolved Grievance" [data]="dashboard?.totalGrievance" dataName="Total Grievance"></app-charts-widget1>
+    </div>
+    <div class="col-xl-6">
+  
+      <app-charts-widget1 *ngIf="dashboard" name="School Visits" [total]="dashboard?.visit" [month]="dashboard.grievanceMonth" subDataName="Absent" dataName="Total School Visit" [subData]="dashboard?.totalAbsent" [data]="dashboard?.totalVisit"></app-charts-widget1>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+<!--<div class="row gy-5 g-xl-8">
+  <div class="col-xl-8">
+    <app-cards-widget17 cssClass="mb-5 mb-xl-10"></app-cards-widget17>
+  </div>
+  <div class="col-xl-4">
+  </div>
+</div> -->
+<div class="row gy-5 g-xl-8" *ngIf="user?.type == 1 || user?.type == 5">
+  <div class="card mb-5 mb-xl-8">
+    <div class="card-header border-0 pt-5">
+      <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bolder fs-3 mb-1">Grievance List</span>
+        <span class="text-muted mt-1 fw-bold fs-7">List of grievances submitted by schools</span>
+      </h3>
+    </div>
+    <!-- end::Header -->
+    <!-- begin::Body -->
+    <div class="card-body py-3">
+      <!-- begin::Table container -->
+      <div class="table-responsive">
+        <app-grievance [types] = 1></app-grievance>
+        <!-- begin::Table
+        <table id="dashboard_queue_table" datatable [dtOptions]="dtOptions" class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"></table>
+         end::Table -->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row gy-5 g-xl-8" *ngIf="user?.type == 4 || user?.type == 3">
+  <div class="card mb-5 mb-xl-8">
+    <div class="card-header border-0 pt-5">
+      <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bolder fs-3 mb-1">School Visit List</span>
+        <!-- <span class="text-muted mt-1 fw-bold fs-7">Assets Allocated to Schools</span> -->
+      </h3>
+    </div>
+    <!-- end::Header -->
+    <!-- begin::Body -->
+    <div class="card-body py-3">
+      <!-- begin::Table container -->
+      <div class="table-responsive">
+        <app-school-visits [type] = 1></app-school-visits>
+        <!-- begin::Table
+        <table id="dashboard_queue_table" datatable [dtOptions]="dtOptions" class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"></table>
+         end::Table -->
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row gy-5 g-xl-8" *ngIf="user?.type == 3">
+  <div class="card mb-5 mb-xl-8">
+    <div class="card-header border-0 pt-5">
+      <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bolder fs-3 mb-1">Asset Allocation List</span>
+        <span class="text-muted mt-1 fw-bold fs-7">Assets Allocated to Schools</span>
+      </h3>
+    </div>
+    <!-- end::Header -->
+    <!-- begin::Body -->
+    <div class="card-body py-3">
+      <!-- begin::Table container -->
+      <div class="table-responsive">
+        <app-assets></app-assets>
+        <!-- begin::Table
+        <table id="dashboard_queue_table" datatable [dtOptions]="dtOptions" class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"></table>
+         end::Table -->
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- begin:: Modal example -->
+<!-- <app-modal #modal [modalConfig]="modalConfig">
+  Modal body html
+</app-modal>
+<button class="btn btn-primary" (click)="openModal()">Open modal</button> -->
+<!-- Note: Don't forget import LeanModalsModule (from _metronic/partials) into your module -->
+<!-- end:: Modal example -->

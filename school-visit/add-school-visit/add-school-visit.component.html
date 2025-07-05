@@ -1,0 +1,104 @@
+<form [formGroup]="addForm" (ngSubmit)="onInsert(addForm.value)">
+    <div>
+        <div class="card shadow-none rounded-0 w-100">
+            <div class="card-header">
+                <h3 class="card-title fw-bolder text-dark">Add {{entityName}}</h3>
+            </div>
+            <div class="card-body position-relative">
+                <div>
+
+                    <!--Modify the form according to field Start-->
+
+                    <div class="row mb-6">
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">School Name</label>
+                            <div class="fv-row">
+                                <ng-select
+                                [(ngModel)]="schoolId"
+                                (change)="loadServiceEngineers($event)"
+                                formControlName="school_id" 
+                                 [items]="schoolList"
+                                [multiple]="false"
+                                [closeOnSelect]="true"
+                                [searchable]="true"
+                                placeholder="Select School"
+                                bindLabel="name"
+                                bindValue="id"
+     
+                     >
+                     </ng-select>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('school_id')?.touched && addForm.get('school_id')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6" >Service Engineer</label>
+                            <div class="fv-row" >
+                                <ng-select
+                                [(ngModel)]="engineerId"
+                                formControlName="service_engineer" 
+                                 [items]="engineerList"
+                                [multiple]="false"
+                                [closeOnSelect]="true"
+                                [searchable]="true"
+                                placeholder="Select Service Engineer"
+                                bindLabel="user_name"
+                                bindValue="id"
+     
+                     >
+                     </ng-select>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('service_engineer')?.touched && addForm.get('service_engineer')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div>
+
+
+
+                    <div class="row mb-6">
+                     <div class="col-lg-6">
+                        <label class="col-form-label required fw-bold fs-6" >Visit By: </label>
+                        <div class="fv-row" >
+                           <input [(ngModel)]="fromDate" class="form-control form-control-lg form-control-solid" formControlName="date" type="date" [min]="today">
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('date')?.touched && addForm.get('date')?.hasError('required')">
+                                <div class="fv-help-block"> This is a required field</div>
+                            </div>
+                        </div>
+                     </div>
+                     <!-- <div class="col-lg-6" *ngIf="fromDate != null">
+                        <label class="col-form-label required fw-bold fs-6" >To Date</label>
+                        <div class="fv-row" >
+                           <input class="form-control form-control-lg form-control-solid" formControlName="to" type="date" [min]="fromDate">
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('to')?.touched && addForm.get('to')?.hasError('required')">
+                                <div class="fv-help-block"> This is a required field</div>
+                            </div>
+                        </div>
+                     </div> -->
+                    </div>
+                   
+                    <div class="col-lg-12 fv-row" style="text-align: left">
+                        <button [disabled]="!addForm.valid" class="btn btn-primary" type="submit" >
+                            <ng-container *ngIf="!isLoading">Save Changes</ng-container>
+                            <ng-container *ngIf="isLoading">
+                              <span [style.display]="'block'" clas="indicator-progress">
+                                Please wait...{{ " " }}
+                                  <span
+                                          class="spinner-border spinner-border-sm align-middle ms-2"
+                                  ></span>
+                              </span>
+                            </ng-container>
+                        </button>
+                    </div>
+
+                    <!--Modify the form according to field End-->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

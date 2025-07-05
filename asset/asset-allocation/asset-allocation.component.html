@@ -1,0 +1,87 @@
+<div class="card mb-5 mb-xl-8">
+    <div class="card-header border-0 pt-5">
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bolder fs-3 mb-1">Manage {{commonEntityName}}</span>
+            <!--<span class="text-muted mt-1 fw-bold fs-7">Manage Frontend Users</span>-->
+        </h3>
+        <!--<div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add User">
+
+            <a routerLink="/schools/add" routerLinkActive="active" class="btn btn-sm btn-primary">
+                <span [inlineSVG]="'./assets/media/icons/schoolnet/plus-squared.svg'" class="svg-icon svg-icon-3"></span>
+                Add {{commonEntityName}}
+            </a>
+        </div>-->
+    </div>
+
+    <div class="card-body py-3">
+        <!-- begin::Table container -->
+        <div class="table-responsive">
+            <!-- begin::Table -->
+            <table id="frontend_user_table"  class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                <tr>
+                    <th>School Name</th>
+                    <th>UDISE Code</th>
+                    <th>Service Engineer</th>
+                    <th>Action</th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <span class="semidarkText fs-3 fw-semibold">S.K.S. Public School</span>
+                        <br>
+                        <span>Secondary</span>
+                    </td>
+                    <td>
+                        2133651545
+                    </td>
+                    <td>
+                        <span class="semidarkText fs-3 fw-semibold">Robert Smith</span>
+                        <br>
+                        <span>123456789</span>
+                    </td>
+
+
+                    <td>
+                        <a class="btn btn-sm btn-secondary me-4">
+                            <span [inlineSVG]="'./assets/media/icons/schoolnet/view.svg'" class="svg-icon svg-icon-3"></span>
+                            View Asset list
+                        </a>
+                        <a class="btn btn-sm btn-primary" (click)="openModal(1)">
+                            <span [inlineSVG]="'./assets/media/icons/schoolnet/plus-squared.svg'" class="svg-icon svg-icon-3"></span>
+                            New Asset
+                        </a>
+                    </td>
+                </tr>
+
+
+
+
+            </table>
+            <!-- end::Table -->
+        </div>
+
+    </div>
+
+</div>
+
+<!--
+<tutopia-app-modal #modal_window [modalConfig]="modalConfig">
+    {{modalBody}}
+</tutopia-app-modal>
+-->
+
+<div class="modal bs-modal" tabindex="-1" role="dialog" [ngStyle]="{'display':viewNewAssetModalStyle}">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">User Details</h4>
+                <button type="button" class="close" (click)="closePopup()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body fs-4 lightText">
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+<form [formGroup]="addForm" (ngSubmit)="onInsert(addForm.value)">
+    <div>
+        <div class="card shadow-none rounded-0 w-100">
+            <!--<div class="card-header">
+                <h3 class="card-title fw-bolder text-dark">Add {{entityName}}</h3>
+            </div>-->
+            <div class="card-body position-relative">
+                <div>
+
+                    <!--Modify the form according to field Start-->
+
+                    <div class="row mb-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 required">Project Type</label>
+                        <div class="col-lg-8 fv-row">
+                            <select [(ngModel)]="projectType" (change)="projectTypeChange()" formControlName="project" name="project" required class="form-select form-select-solid form-select-lg fw-bold" >
+                                <option [defaultSelected]="true" disabled>Select Project Type</option>
+                                <option value="1">IFP</option>
+                                <option value="2">KYN</option>
+                            </select>
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('project')?.touched && addForm.get('project')?.hasError('required')">
+                                <div class="fv-help-block"> This is a required field</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <label class="col-lg-4 col-form-label required fw-bold fs-6">Asset Category</label>
+                        <div class="col-lg-8 fv-row">
+                            <ng-select
+                            [(ngModel)]="categoryId"
+                            (change)="loadAssets()"
+                            formControlName="asset_category_id" 
+                             [items]="assetCtegoryList"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            placeholder="Select Asset"
+                            bindLabel="name"
+                            bindValue="id"
+ 
+                 >
+                 </ng-select>
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('asset_category_id')?.touched && addForm.get('asset_category_id')?.hasError('required')">
+                                <div class="fv-help-block"> This is a required field</div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row mb-6">
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">Asset Sub Category</label>
+                            <div class="col-lg-8 fv-row">
+                                <ng-select
+                                [(ngModel)]="asset_type_id"
+                                formControlName="asset_type_id" 
+                                 [items]="assetList"
+                                [multiple]="false"
+                                [closeOnSelect]="true"
+                                [searchable]="true"
+                                placeholder="Select Asset"
+                                bindLabel="name"
+                                bindValue="id"
+     
+                     >
+                     </ng-select>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('asset_type_id')?.touched && addForm.get('asset_type_id')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div>
+                            </div>
+                        </div>
+                    
+
+                    <div class="row mb-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 required">Model / Make</label>
+                        <div class="col-lg-8 fv-row">
+                            <input formControlName="model" name="model" placeholder="Model/Make"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('model')?.touched && addForm.get('model')?.hasError('required')">
+                                <div class="fv-help-block"> This is a required field</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-6">
+                        <label class="col-lg-4 col-form-label fw-bold fs-6 required">Serial No.</label>
+                        <div class="col-lg-8 fv-row">
+                            <input formControlName="serial_no" name="serial_no" placeholder="Serial No."  type="text" required class="form-control form-control-lg form-control-solid"/>
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('serial_no')?.touched && addForm.get('serial_no')?.hasError('required')">
+                                <div class="fv-help-block"> This is a required field</div>
+                            </div>
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('serial_no')?.touched && addForm.get('serial_no')?.hasError('serialNoExists')">
+                                <div class="fv-help-block"> Serial No. must be unique</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+
+                    <div class="col-lg-12 fv-row" style="text-align: right">
+                        <button [disabled]="!addForm.valid" class="btn btn-primary" type="submit" >
+                            <ng-container *ngIf="!isLoading">Save Changes</ng-container>
+                            <ng-container *ngIf="isLoading">
+                              <span [style.display]="'block'" class="indicator-progress">
+                                Please wait...{{ " " }}
+                                  <span
+                                          class="spinner-border spinner-border-sm align-middle ms-2"
+                                  ></span>
+                              </span>
+                            </ng-container>
+                        </button>
+                    </div>
+
+                    <!--Modify the form according to field End-->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

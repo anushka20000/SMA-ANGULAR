@@ -1,0 +1,245 @@
+<form [formGroup]="addForm" (ngSubmit)="onUpdate(addForm.value)">
+    <div>
+        <div class="card shadow-none rounded-0 w-100">
+            <div class="card-header">
+                <h3 class="card-title fw-bolder text-dark">Edit {{entityName}}</h3>
+            </div>
+            <div class="card-body position-relative">
+                <div>
+
+                    <!--Modify the form according to field Start-->
+
+                    <div class="row mb-6">
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">School Name</label>
+                            <div class="fv-row">
+                                <input formControlName="name" name="name" placeholder="School Name"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('name')?.touched && addForm.get('name')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">School Type</label>
+                            <div class="fv-row">
+                                <select formControlName="school_type" name="school_type" required class="form-select form-select-solid form-select-lg fw-bold">
+                                    <option value="">Select School Type</option>
+                                    <option value="1">Elementary</option>
+                                    <option value="2">Secondary</option>
+                                   
+    
+                                </select>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('school_type')?.touched && addForm.get('school_type')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row mb-6">
+                        <div class="col-lg-6">
+                            <label class="col-form-label  fw-bold fs-6">Code</label>
+                            <div class="fv-row">
+                                <input formControlName="code" name="code" placeholder="Code"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                              
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">UDISE Code</label>
+                            <div class="fv-row">
+                                <input formControlName="UDISE_code" name="UDISE_code" placeholder="UDISE Code"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('UDISE_code')?.touched && addForm.get('UDISE_code')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('UDISE_code')?.touched && addForm.get('UDISE_code')?.hasError('code')">
+                                    <div class="fv-help-block">Code should be unique</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row mb-6">
+                        <div class="col-lg-6">
+                            <label class="col-form-label fw-bold fs-6">Block</label>
+                        <div class="fv-row">
+                            <input formControlName="block" name="block" placeholder="Block"  type="text"  class="form-control form-control-lg form-control-solid"/>
+                           
+                        </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label  fw-bold fs-6">SchoolNet Code</label>
+                            <div class="fv-row">
+                                <input formControlName="schoolnet_code" name="schoolnet_code" placeholder="SchoolNet Code"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                               
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-6">
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">School Address</label>
+                            <div class="fv-row">
+                                <input formControlName="address" name="address" placeholder="School Address"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('address')?.touched && addForm.get('address')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">School Pin Code</label>
+                        <div class="fv-row">
+                            <input formControlName="pincode" name="pincode" placeholder="School Pin Code"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('pincode')?.touched && addForm.get('pincode')?.hasError('required')">
+                                <div class="fv-help-block"> This is a required field</div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">School District</label>
+                        <div class="fv-row">
+                            <input formControlName="district" name="district" placeholder="School District"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('district')?.touched && addForm.get('district')?.hasError('required')">
+                                <div class="fv-help-block"> This is a required field</div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">Head Master Name</label>
+                            <div class="fv-row">
+                                <input formControlName="master_name" name="master_name" placeholder="Head Master Name"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('master_name')?.touched && addForm.get('master_name')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">Head Master Number</label>
+                            <div class="fv-row">
+                                <input formControlName="master_number" name="master_number" placeholder="Head Master Number"  type="text" required class="form-control form-control-lg form-control-solid"/>
+                                <div class="fv-plugins-message-container" *ngIf="addForm.get('master_number')?.touched && addForm.get('master_number')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label fw-bold fs-6"></label>
+                        <div  class="fv-row">
+                            <div class="form-check form-check-inline">
+                                <input (change)="onTypeChange()" class="form-check-input" type="radio" name="gengerRadio" id="genderMale" value="1" checked (change)="defaultContactChange($event)">
+                                <label class="form-check-label" for="genderMale">Contact Person</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input (change)="onTypeChange()" class="form-check-input" type="radio" name="gengerRadio" id="genderFemale" value="2" (change)="defaultContactChange($event)">
+                                <label class="form-check-label" for="genderFemale">Add Different Contact Person</label>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row mb-6">
+                        <div class="col-lg-6" *ngIf="showContcatDetails==2">
+                            <label class="col-form-label  fw-bold fs-6">Contact Person Name</label>
+                            <div class="fv-row">
+                                <input formControlName="contact_person" name="contact_person" placeholder="Contact Person Name"  type="text"  class="form-control form-control-lg form-control-solid"/>
+                                <!-- <div class="fv-plugins-message-container" *ngIf="addForm.get('contact_person')?.touched && addForm.get('contact_person')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div> -->
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6" *ngIf="showContcatDetails==2">
+                            <label class="col-form-label fw-bold fs-6">Contact Person Number</label>
+                            <div class="fv-row">
+                                <input formControlName="contact_person_number" name="contact_person_number" placeholder="ContContact Person Number"  type="text"  class="form-control form-control-lg form-control-solid"/>
+                                <!-- <div class="fv-plugins-message-container" *ngIf="addForm.get('contact_person_number')?.touched && addForm.get('contact_person_number')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div> -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                  
+
+                    <div class="row mb-6">
+                        <div class="col-lg-6" *ngIf="showContcatDetails==2">
+                            <label class="col-form-label fw-bold fs-6">Contact Person Designation</label>
+                            <div class="fv-row">
+                                <input formControlName="contact_person_designation" name="contact_person_designation" placeholder="Contact Person Designation"  type="text"  class="form-control form-control-lg form-control-solid"/>
+                                <!-- <div class="fv-plugins-message-container" *ngIf="addForm.get('contact_person_designation')?.touched && addForm.get('contact_person_designation')?.hasError('required')">
+                                    <div class="fv-help-block"> This is a required field</div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="col-form-label required fw-bold fs-6">Project Type</label>
+                            <div class="fv-row" (change)="loadServiceEngineers()">
+                               
+                                <div class="form-check form-check-inline">
+    
+                                    <input [(ngModel)]="ifp" formControlName="ifp"  class="form-check-input" type="checkbox" name="ifp" id="ifp" value="1">
+                                    <label class="form-check-label" for="ifp">IFP</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+    
+                                    <input [(ngModel)]="kyan" formControlName="kyan" class="form-check-input" type="checkbox" name="kyan" id="kyan" value="2">
+                                    <label class="form-check-label" for="kyan">KYAN</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-6">
+                       <div class="col-lg-6">
+                        <label class="col-form-label required fw-bold fs-6" >Service Engineer</label>
+                        <div class="fv-row" >
+                            <ng-select
+                            [(ngModel)]="engineerId"
+                            formControlName="service_engineer" 
+                             [items]="engineerList"
+                            [multiple]="false"
+                            [closeOnSelect]="true"
+                            [searchable]="true"
+                            placeholder="Select Service Engineer"
+                            bindLabel="user_name"
+                            bindValue="id"
+ 
+                 >
+                 </ng-select>
+                            <div class="fv-plugins-message-container" *ngIf="addForm.get('service_engineer')?.touched && addForm.get('service_engineer')?.hasError('required')">
+                                <div class="fv-help-block"> This is a required field</div>
+                            </div>
+                        </div>
+                       </div>
+                    </div>
+
+               
+
+                    <div class="col-lg-12 fv-row" style="text-align: left">
+                        <button [disabled]="!addForm.valid" class="btn btn-primary" type="submit" >
+                            <ng-container *ngIf="!isLoading">Save Changes</ng-container>
+                            <ng-container *ngIf="isLoading">
+                              <span [style.display]="'block'" clas="indicator-progress">
+                                Please wait...{{ " " }}
+                                  <span
+                                          class="spinner-border spinner-border-sm align-middle ms-2"
+                                  ></span>
+                              </span>
+                            </ng-container>
+                        </button>
+                    </div>
+
+                    <!--Modify the form according to field End-->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

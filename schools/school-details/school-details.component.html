@@ -1,0 +1,112 @@
+<div class="border border-dotted border-6 border-gray-2 rounded p-5 mb-6">
+    <div class="row mb-6">
+        <div class="col-lg-12">
+            <span class="fs-2 semidarkText fw-bold me-4">S.K.S Public School</span>
+            <span class="badge-light-success me-4 p-3 fs-4 border border-0 rounded">Secondary</span>
+            <span>User Id : 1234567</span>
+        </div>
+    </div>
+    <div class="row mb-6">
+        <div class="col-lg-12 fw-semibold">
+            <span class="me-1">
+                Head Master
+            </span>
+            <span class="fs-2 fw-semibold semidarkText">
+                Shantay Jain
+            </span>
+            <span class="me-4 fs-3 fw-semibold semidarkText badge badge-light-secondary">
+                <span [inlineSVG]="'./assets/media/icons/schoolnet/phone-call.svg'" class="svg-icon svg-icon-1"></span>
+                123456789
+            </span>
+
+
+            <span class="me-1">
+                Schoolnet Code
+            </span>
+            <span class="fs-2 fw-semibold semidarkText">
+                121212121
+            </span>
+        </div>
+    </div>
+    <div class="row mb-6">
+        <div class="col-lg-12 fw-semibold">
+            <span class="me-1">
+                UDISE Code
+            </span>
+            <span class="fs-2 fw-semibold semidarkText">
+                547891498
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-none rounded-0 w-100 mb-7">
+    <div class="card-body p-1 ps-5">
+        <div class="d-flex h-55px">
+            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
+                <li class="nav-item">
+                    <a [class]="'cursor-pointer nav-link text-active-primary me-6'+(activeTab==1?' active':'')" (click)="changeTab(1)">
+                        Overview
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [class]="'cursor-pointer nav-link text-active-primary me-6'+(activeTab==2?' active':'')" (click)="changeTab(2)">
+                        Assets
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="mt-7">
+    <ng-container *ngIf="activeTab==1">
+        <div class="border border-dotted border-6 border-gray-2 rounded p-5 mb-6">
+            <div class="card">
+                <!--<div class="card-header">
+                    <h2>Overview</h2>
+                </div>-->
+                <div class="card-body fs-3">
+                    <div class="row mb-5">
+                        <div class="col-lg-4">Contact Person : </div>
+                        <div class="col-lg-8 text-dark">James Doe <span class="badge badge-light-success fs-3 p-2">Teacher</span></div>
+
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-lg-4">Contact Person Number : </div>
+                        <div class="col-lg-8 text-dark">123456789</div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-lg-4">Full Address : </div>
+                        <div class="col-lg-8 text-dark">Block A 45, Sainik Colony, Race Course, Amritsir, Punjab, 863001</div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-lg-4">District : </div>
+                        <div class="col-lg-8 text-dark">Howrah</div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-lg-4">Pin Code : </div>
+                        <div class="col-lg-8 text-dark">744474</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeTab==2">
+        <div class="border border-dotted border-6 border-gray-2 rounded p-5 mb-6">
+            <div class="card">
+               
+                  
+                <app-assets></app-assets>
+            </div>
+        </div>
+
+    </ng-container>
+</div>
+
+
+

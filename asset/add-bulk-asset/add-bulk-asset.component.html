@@ -1,0 +1,37 @@
+<div class="row mb-6">
+
+    <!-- <div class="row mb-6">
+        <label class="col-lg-4 col-form-label fw-bold fs-6 required">Project Type</label>
+        <div class="col-lg-8 fv-row">
+            <select formControlName="project" name="project" required class="form-select form-select-solid form-select-lg fw-bold" >
+                <option [defaultSelected]="true" disabled>Select Project Type</option>
+                <option value="1">IFP</option>
+                <option value="2">KYN</option>
+            </select>
+          
+        </div>
+    </div> -->
+    <div class="row mb-6">
+        <div class="col-lg-6">
+            <button
+            class="btn btn-primary"
+            type="button"
+            (click)="downloadExcel()"
+          >
+            <ng-container>Download Sample</ng-container>
+          </button>
+        </div>
+    </div>
+    
+    <label class="col-lg-4 col-form-label required fw-bold fs-6">Excel</label>
+   
+    <ngx-dropzone (change)="uploadFile($event)" [multiple]="false" 
+    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                  class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6 horizontal-box">
+        <ngx-dropzone-label>Select File to Upload</ngx-dropzone-label>
+
+        <ngx-dropzone-preview [file]="pdfFile" *ngIf="pdfFile" [removable]="true"  (removed)="onRemovePdf(pdfFile)">
+            <ngx-dropzone-label>{{ pdfFile.name }}</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+    </ngx-dropzone>
+</div>

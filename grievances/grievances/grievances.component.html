@@ -1,0 +1,130 @@
+<div class="card mb-5 mb-xl-8">
+    <div class="card-header border-0 pt-5" *ngIf="types !=1">
+        <h3 class="card-title align-items-start flex-column" >
+            <span class="card-label fw-bolder fs-3 mb-1" >Manage {{commonEntityName}}</span>
+            <!--<span class="text-muted mt-1 fw-bold fs-7">Manage Frontend Users</span>-->
+        </h3>
+        <div *ngIf="user.type == 1 || user.type == 3 || user.type == 5" class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Click to add User">
+
+            <a routerLink="/grievances/manage/add"  routerLinkActive="active" class="btn btn-sm btn-primary">
+                <span [inlineSVG]="'./assets/media/icons/schoolnet/plus-squared.svg'" class="svg-icon svg-icon-3"></span>
+                Add {{commonEntityName}}
+            </a>
+        </div>
+    </div>
+
+
+  <div class="card-body py-3">
+    <!-- begin::Table container -->
+    <div class="row mt-5 mb-5" *ngIf="types != 1">
+
+      <div class="col-lg-6 col-md-12 fv-row">
+        <label for="from" class="fw-bold fs-6 me-3"
+        >From:</label>
+
+        <input
+          class="form-control form-control-solid-bg mw-150px d-inline-block me-5"
+          [(ngModel)]="fromDate"
+          id="from"
+          type="date"
+          (change)="handleDateSearch($event)"
+        />
+
+        <label for="to" class="mw-150px fw-bold fs-6 text-end me-3">To:</label>
+        <input
+          class="form-control form-control-solid-bg mw-150px d-inline-block me-5"
+          [(ngModel)]="toDate"
+          (change)="handleDateSearch($event)"
+          id="to"
+          type="date"
+          [min]="fromDate"
+        />
+
+        <button
+          (click)="clearDate()"
+          class="btn btn-primary"
+          *ngIf="toDate !== null || fromDate !== null"
+          type="button"
+        >
+          <ng-container>Clear</ng-container>
+        </button>
+      </div>
+    
+   
+      <!-- <div class="col-lg-2 fv-row" >
+        <select
+          name="ticketType"
+          required
+          class="form-select form-select-solid form-select-lg fw-bold"
+          (change)="onTypeChange($event)"
+        >
+          <option value="">Ticket Type</option>
+          <option value="1">Technical</option>
+          <option value="2">Non Technical</option>
+        </select>
+      </div> -->
+      <div class="col-lg-3 fv-row"  *ngIf="types != 1">
+        <select name="userType" required class="form-select form-select-solid form-select-lg fw-bold"
+        (change)="onProjectTypeChange($event)">
+    <option value="">Project Type</option>
+    <option value="1">IFP</option>
+    <option value="2">KYAN</option>
+  
+</select>
+      </div>
+      <!-- <label for="from" class="col-lg-1 col-form-label fw-bold fs-6">From:</label> -->
+      <div class="col-lg-3 fv-row">
+        <select
+          name="status"
+          required
+          class="form-select form-select-solid form-select-lg fw-bold"
+          (change)="onStatusChange($event)"
+        >
+          <option value="">Status</option>
+          <option value="0">Unassigned</option>
+          <option value="1">Assigned</option>
+          <option value="2">Assigned OEM</option>
+          <option value="3">Completed OEM</option>
+          <option value="4">Unresolved</option>
+          <option value="5">Completed</option>
+          <option value="7">Stolen</option>
+          <option value="6">Resolved SE</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid-control ms-13" >
+    <button (click)="download()" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="school_visit_table" type="button"><span>Download Excel</span></button>
+</div>
+     
+    <div class="table-responsive user-grid">
+      <!-- begin::Table -->
+      <table
+        [id]="commonEntityNameTable"
+        datatable
+        [dtOptions]="dtOptions"
+        class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
+      >
+        <div
+          class="modal bs-modal"
+          tabindex="-1"
+          role="dialog"
+          [ngStyle]="{ display: viewDetailModalStyle }"
+        >
+          <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">User Details</h4>
+                <button type="button" class="close" (click)="closePopup()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body fs-4 lightText">
+                <!-- <app-school-details></app-school-details> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,363 @@
+<form [formGroup]="addForm" (ngSubmit)="onInsert(addForm.value)">
+  <div>
+    <div class="card shadow-none rounded-0 w-100">
+      <div class="card-header">
+        <h3 class="card-title fw-bolder text-dark">Marking {{ entityName }}</h3>
+      </div>
+      <div class="card-header">
+        <h5 class="card-title fw-bolder text-dark">{{ schoolData?.name }}</h5>
+        <!-- <h5 class="card-title fw-bolder text-dark">Visit Date-</h5> -->
+
+        <h5 class="card-title fw-bolder text-dark">{{ schoolData?.date }}</h5>
+      </div>
+      <div class="card-body position-relative">
+        <div>
+          <!--Modify the form according to field Start-->
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Check-in Time</label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                [(ngModel)]="checkIn"
+                formControlName="check_in"
+                name="check_in"
+                placeholder="Check in"
+                type="time"
+                required
+                class="form-control form-control-lg form-control-solid"
+            
+              />
+              <div
+                class="fv-plugins-message-container"
+                *ngIf="
+                  addForm.get('check_in')?.touched &&
+                  addForm.get('check_in')?.hasError('required')
+                "
+              >
+                <div class="fv-help-block">This is a required field</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Status</label
+            >
+            <div class="col-lg-8 fv-row" *ngIf="visitType == 1">
+              <div class="form-check form-check-inline">
+                <input
+                  formControlName="status"
+                  class="form-check-input"
+                  type="radio"
+                  name="status"
+                  id="issue"
+                  value="2"
+                />
+                <label class="form-check-label" for="issue" >Issue</label>
+             
+
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  formControlName="status"
+                  class="form-check-input"
+                  type="radio"
+                  name="status"
+                  id="genderFemale"
+                  value="1"
+                  checked
+                />
+                <label class="form-check-label" for="fine" >Working Fine</label>
+           
+
+              </div>
+              <div
+                class="fv-plugins-message-container"
+                *ngIf="
+                  addForm.get('status')?.touched &&
+                  addForm.get('status')?.hasError('required')
+                "
+              >
+                <div class="fv-help-block">This is a required field</div>
+              </div>
+            </div>
+
+            <div class="col-lg-8 fv-row" *ngIf="visitType != 1">
+              <div class="form-check form-check-inline">
+                <input
+                  formControlName="status"
+                  class="form-check-input"
+                  type="radio"
+                  name="status"
+                  id="issue"
+                  value="3"
+                />
+           
+                <label class="form-check-label" for="issue" >Unresolved</label>
+
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  formControlName="status"
+                  class="form-check-input"
+                  type="radio"
+                  name="status"
+                  id="genderFemale"
+                  value="4"
+                  checked
+                />
+               
+                <label class="form-check-label" for="issue" >Resolved</label>
+
+              </div>
+              <div
+                class="fv-plugins-message-container"
+                *ngIf="
+                  addForm.get('status')?.touched &&
+                  addForm.get('status')?.hasError('required')
+                "
+              >
+                <div class="fv-help-block">This is a required field</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Feedback</label
+            >
+            <div class="col-lg-8 fv-row">
+              <textarea
+                formControlName="feedback"
+                name="feedback"
+                placeholder="feedback"
+                row="5"
+                required
+                class="form-control form-control-lg form-control-solid"
+              ></textarea>
+              <div
+                class="fv-plugins-message-container"
+                *ngIf="
+                  addForm.get('feedback')?.touched &&
+                  addForm.get('feedback')?.hasError('required')
+                "
+              >
+                <div class="fv-help-block">This is a required field</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Check-out time</label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+              [(ngModel)]="checkOut"
+                formControlName="check_out"
+                name="check_out"
+                placeholder="Check out"
+                type="time"
+                required
+                class="form-control form-control-lg form-control-solid"
+              />
+              <div
+                class="fv-plugins-message-container"
+                *ngIf="
+                  addForm.get('check_out')?.touched &&
+                  addForm.get('check_out')?.hasError('required')
+                "
+              >
+                <div class="fv-help-block">This is a required field</div>
+              </div>
+              <div
+                class="fv-plugins-message-container"
+                *ngIf="
+                  addForm.get('check_out')?.touched &&
+                  addForm.get('check_out')?.hasError('minTimeViolation')
+                "
+              >
+                <div class="fv-help-block">
+                  Check-out time must be later than Check-in time
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"
+              >Select a method</label
+            >
+            <div class="col-lg-8 fv-row">
+              <div class="form-check form-check-inline">
+                <input
+                  (change)="onTypeChange($event)"
+                  class="form-check-input"
+                  type="radio"
+                  name="method"
+                  id="method2"
+                  value="0"
+                  checked
+                  (change)="defaultContactChange($event)"
+                />
+                <label class="form-check-label" for="method2">E-sign</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  (change)="onTypeChange($event)"
+                  class="form-check-input"
+                  type="radio"
+                  name="method"
+                  id="method3"
+                  value="1"
+                  (change)="defaultContactChange($event)"
+                />
+                <label class="form-check-label" for="method3"
+                  >Manual Upload</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row mb-6" *ngIf="showDetails == 1">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Upload Signed Verification Slip</label
+            >
+            <!-- <div class="col-lg-8 fv-row">
+              <input
+                formControlName="file"
+                name="address"
+                placeholder="School Address"
+                type="file"
+                required
+                class="form-control form-control-lg form-control-solid"
+              />
+              <div
+                class="fv-plugins-message-container"
+                *ngIf="
+                  addForm.get('file')?.touched &&
+                  addForm.get('file')?.hasError('file')
+                "
+              >
+                <div class="fv-help-block">This is a required field</div>
+              </div>
+            </div> -->
+
+            <div class="col-lg-6">
+              <label class="col-form-label fw-bold fs-6">Upload File</label>
+
+              <ngx-dropzone (change)="uploadFile($event)" [multiple]="false" 
+        class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6 horizontal-box custom-dropzone">
+<ngx-dropzone-label>Select File to Upload</ngx-dropzone-label>
+
+<ngx-dropzone-preview  [file]="pdfFile" *ngIf="pdfFile" [removable]="true"  (removed)="onRemovePdf(pdfFile)">
+  <ngx-dropzone-label>{{ pdfFile.name }}</ngx-dropzone-label>
+</ngx-dropzone-preview>
+</ngx-dropzone>
+<div
+                class="fv-plugins-message-container"
+                *ngIf="
+                  addForm.get('file')?.touched &&
+                  addForm.get('file')?.hasError('file')
+                "
+              >
+                <div class="fv-help-block">This is a required field</div>
+              </div>
+          </div>
+          </div>
+
+          <!-- <div class="row mb-6" *ngIf="showDetails == 1">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"
+              >Verification Slip Sample</label
+            >
+            <div class="col-lg-8 fv-row">
+              <button
+                [disabled]="!addForm.valid"
+                class="btn btn-secondary"
+                type="submit"
+              >
+                download
+              </button>
+            </div>
+          </div> -->
+          <div class="row mb-6" *ngIf="showDetails == 0">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Disclaimer</label
+            >
+            <div class="col-lg-8 fv-row">
+              <input
+                
+                name="disclaimer"
+                type="checkbox"
+                checked
+                required
+                class=""
+              />
+              I confirm all the above information are correct and are conducted
+              under my supervision
+            </div>
+            <!-- <div
+              class="fv-plugins-message-container"
+              *ngIf="
+                addForm.get('checkbox')?.touched &&
+                addForm.get('checkbox')?.hasError('required')
+              "
+            >
+              <div class="fv-help-block">This is a required field</div>
+            </div> -->
+          </div>
+          <div class="row mb-6" *ngIf="showDetails == 0">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Upload E-sign</label
+            >
+            <div class="col-lg-4 fv-row">
+              <signature-pad
+              *ngIf="!signatureDataUrl"
+      #signaturePad
+      [options]="signaturePadOptions"
+      (onEndEvent)="saveSignature()"
+      class="form-control form-control-lg form-control-solid"
+    ></signature-pad>
+              <div
+                class="fv-plugins-message-container"
+                *ngIf="
+                  addForm.get('sign')?.touched &&
+                  addForm.get('sign')?.hasError('required')
+                "
+              >
+                <div class="fv-help-block">This is a required field</div>
+              </div>
+              <div *ngIf="signatureDataUrl">
+                <label class="col-lg-4 col-form-label fw-bold fs-6">Uploaded</label>
+                <div class="col-lg-8 fv-row">
+                  <img [src]="signatureDataUrl" alt="Uploaded Signature" class="img-thumbnail" />
+                </div>
+              </div>
+              <button *ngIf="!signatureDataUrl" type="button" class="btn btn-sm btn-primary m-2" (click)="saveSignature()">Upload</button>
+              <button *ngIf="!signatureDataUrl" type="button" class="btn btn-sm btn-primary m-2" (click)="clearSignature()">Clear </button>
+            </div>
+          </div>
+          <div class="col-lg-12 fv-row" style="text-align: right">
+            <button
+              [disabled]="!addForm.valid"
+              class="btn btn-primary"
+              type="submit"
+            >
+              <ng-container *ngIf="!isLoading">Save Changes</ng-container>
+              <ng-container *ngIf="isLoading">
+                <span [style.display]="'block'" clas="indicator-progress">
+                  Please wait...{{ " " }}
+                  <span
+                    class="spinner-border spinner-border-sm align-middle ms-2"
+                  ></span>
+                </span>
+              </ng-container>
+            </button>
+          </div>
+
+          <!--Modify the form according to field End-->
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

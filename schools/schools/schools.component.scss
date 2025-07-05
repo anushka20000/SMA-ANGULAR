@@ -1,0 +1,42 @@
+
+tr{
+  th{
+    padding-left: 5px !important;
+    color: #464545;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  td{
+    padding-left: 3px !important;
+    color: #949393;
+    font-weight: 500;
+    font-size: 15px;
+  }
+}
+
+.bs-modal{
+  color:#9E9E9E;
+  .modal-header{
+    button{
+      background: transparent;
+      border: none;
+      font-size: 26px;
+      color: #9E9E9E;
+      padding: 0;
+    }
+  }
+}
+
+.semidarkText{
+  color: #464545;
+}
+
+.lightText{
+  color: #949393;
+}
+
+@media (min-width: 992px) { /* Bootstrap's 'lg' breakpoint */
+  .school-grid {
+    margin-top: -55px;
+  }
+}
